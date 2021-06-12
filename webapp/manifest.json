@@ -23,6 +23,12 @@
 				"sap.uxap": {}
 			}
 		},
+		"models":{
+			"oModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "./source/list.json"
+			  }
+		},
 		"config": {
 			"fullWidth": true
 		},

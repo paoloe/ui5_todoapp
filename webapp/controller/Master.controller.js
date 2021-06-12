@@ -12,7 +12,7 @@ sap.ui.define([
 		onInit: function () {
 			this.oView = this.getView();
 			this._bDescendingSort = false;
-			this.oProductsTable = this.oView.byId("productsTable");
+			this.oModel = this.oView.byId("productsTable");
 			this.oRouter = this.getOwnerComponent().getRouter();
 		},
 
@@ -40,7 +40,7 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			var productPath = oEvent.getSource().getBindingContext("products").getPath(),
+			var productPath = oEvent.getSource().getBindingContext("list").getPath(),
 				product = productPath.split("/").slice(-1).pop(),
 				oNextUIState;
 			this.getOwnerComponent().getHelper().then(function (oHelper) {
