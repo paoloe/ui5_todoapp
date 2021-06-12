@@ -20,7 +20,9 @@ sap.ui.define([
 			UIComponent.prototype.init.apply(this, arguments);
 
 			oModel = new JSONModel();
-			this.setModel(oModel);
+			// load the list data source
+			oModel.loadData("source/list.json");
+			this.setModel(oModel, 'lists');
 
 			// set products demo model on this sample
 			oProductsModel = new JSONModel(sap.ui.require.toUrl('sap/ui/demo/mock/products.json'));
