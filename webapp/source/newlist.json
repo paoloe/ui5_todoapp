@@ -1,0 +1,28 @@
+[
+    {
+        "id":"0",
+        "listname": "To do",
+        "listItems": [{
+            "titem1": {
+                "text": "hello1",
+                "status": "true"
+            },
+            "titeam2": {                
+                "text": "hello4",
+                "status": "true"}
+        }]
+    },
+    {
+        "id":"1",
+        "listname": "Completed",
+        "listItems": [{
+            "citem1": {
+                "text": "hello4",
+                "status": "true"
+            },
+            "citem2": {                
+                "text": "hello4",
+                "status": "true"}
+        }]
+    }
+]

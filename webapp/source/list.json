@@ -1,10 +1,20 @@
 [
     {   
         "id": "1",
-        "listName": "To Do"  
+        "listName": "To Do",
+        "status": "TRUE",
+        "action": "Add check box",
+        "description": "You can add more text here to describe...",
+        "dateset": "28/06/2021",
+        "datedue": "01/07/2021"
     },
     {
         "id": "2",
-        "listName": "Completed"
+        "listName": "Completed",
+        "status": "FALSE",
+        "action": "Add detail detail",
+        "description": "2: You can add more text here to describe...",
+        "dateset": "28/06/2021",
+        "datedue": "01/07/2021"
     }
 ]
