@@ -14,6 +14,12 @@ sap.ui.define([
 			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
+
+			// var oBunlde2 = this.getView().getModel("oModel").getProperty("/");
+			// for(var i = 0; i < oBunlde2.length; i++){
+			// 	var obj = oBunlde2[i];
+			// 	console.log(obj);
+			// }
 		},
 
 		onSupplierPress: function (oEvent) {
