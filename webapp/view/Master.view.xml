@@ -26,7 +26,7 @@
 					id="productsTable"
 					inset="false"
 					items="{
-						path: 'newlist>/'}"
+						path: 'list>/'}"
 					class="sapFDynamicPageAlignContent"
 					width="auto">
 					<columns>
@@ -40,7 +40,7 @@
 					<items>
 						<ColumnListItem type="Navigation" press=".onListItemPress">
 							<cells>
-								<ObjectIdentifier text="{newlist>listname}"/>
+								<ObjectIdentifier text="{list>listName}"/>
 								<!--add the number of actions per list here-->
 							</cells>
 						</ColumnListItem>

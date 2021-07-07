@@ -26,7 +26,7 @@
 		"models":{
 			"oModel": {
 				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./source/newlist.json"
+				"uri": "./source/list.json"
 			  }
 		},
 		"config": {
