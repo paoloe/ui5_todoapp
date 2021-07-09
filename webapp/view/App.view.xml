@@ -15,5 +15,8 @@
 		<midColumnPages>
 			<mvc:XMLView id="detailView" viewName="sap.ui.demo.fiori2.view.Detail"/>
 		</midColumnPages>
+		<endColumnPages>
+			<mvc:XMLView id="detailDetailView" viewName="sap.ui.demo.fiori2.view.DetailDetail"/>
+		</endColumnPages>
 	</FlexibleColumnLayout>
 </mvc:View>

@@ -2,13 +2,14 @@
 	controllerName="sap.ui.demo.fiori2.controller.DetailDetail"
 	xmlns="sap.f"
 	xmlns:m="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout">
 	<DynamicPage toggleHeaderOnTitleClick="false">
 		<title>
 			<DynamicPageTitle>
 				<heading>
 					<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Center">
-						<m:Title text="{products>text}" wrapping="true" class="sapUiTinyMarginEnd"/>
+						<m:Title text="{list>/0/action}" wrapping="true" class="sapUiTinyMarginEnd"/>
 					</m:FlexBox>
 				</heading>
 
@@ -35,7 +36,11 @@
 			</DynamicPageTitle>
 		</title>
 		<content>
-			<m:Link text="Navigate to next page…" press=".handleAboutPress"/>
+			<m:Input
+			value="{list>/0/description}"
+			width="80%"
+			fieldWidth="60%"
+			class="sapUiSmallMarginBottom" />
 		</content>
 	</DynamicPage>
 </mvc:View>

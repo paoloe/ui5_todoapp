@@ -88,10 +88,6 @@
 				"detailDetail": {
 					"viewName": "DetailDetail",
 					"controlAggregation": "endColumnPages"
-				},
-				"page2": {
-					"viewName": "AboutPage",
-					"controlAggregation": "endColumnPages"
 				}
 			}
 		}
