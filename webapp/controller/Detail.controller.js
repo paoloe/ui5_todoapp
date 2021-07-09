@@ -1,13 +1,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+	'sap/f/library'
+], function (Controller, fioriLibrary) {
 	"use strict";
 
 	return Controller.extend("sap.ui.demo.fiori2.controller.Detail", {
 		onInit: function () {
 			this.oOwnerComponent = this.getOwnerComponent();
 
+			this.oView = this.getView();
 			this.oRouter = this.oOwnerComponent.getRouter();
 			this.oModel = this.oOwnerComponent.getModel();
 
@@ -23,25 +24,30 @@ sap.ui.define([
 		},
 
 		onSupplierPress: function (oEvent) {
-			var supplierPath = oEvent.getSource().getBindingContext("products").getPath(),
-				supplier = supplierPath.split("/").slice(-1).pop(),
-				oNextUIState;
+			// var supplierPath = oEvent.getSource().getBindingContext("list").getPath(),
+			// 	supplier = supplierPath.split("/").slice(-1).pop();
+			// 	oNextUIState;
 
-			this.oOwnerComponent.getHelper().then(function (oHelper) {
-				oNextUIState = oHelper.getNextUIState(2);
-				this.oRouter.navTo("detailDetail", {
-					layout: oNextUIState.layout,
-					supplier: supplier,
-					product: this._product
-				});
-			}.bind(this));
+			// this.oOwnerComponent.getHelper().then(function (oHelper) {
+			// 	oNextUIState = oHelper.getNextUIState(2);
+			// 	this.oRouter.navTo("detailDetail", {
+			// 		layout: oNextUIState.layout,
+			// 		supplier: supplier,
+			// 		product: this._product
+			// 	});
+			// }.bind(this));
+
+			// this.oRouter.navTo("detailDetail", {layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, supplier: supplier, product: this._product});
+
+			var oFCL = this.oView.getParent().getParent();
+			oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);	
 		},
 
 		_onProductMatched: function (oEvent) {
 			this._product = oEvent.getParameter("arguments").product || this._product || "0";
 			this.getView().bindElement({
-				path: "/ProductCollection/" + this._product,
-				model: "products"
+				path: "/list/" + this._product,
+				model: "list"
 			});
 		},
 

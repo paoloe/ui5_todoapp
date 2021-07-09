@@ -4,7 +4,7 @@
         "listName": "To Do",
         "selected": true,
         "action": "Add check box",
-        "description": "You can add more text here to describe...",
+        "description": "You can add more text here for additional notes",
         "dateset": "28/06/2021",
         "datedue": "01/07/2021"
     },
@@ -13,7 +13,7 @@
         "listName": "Completed",
         "selected": false,
         "action": "Add detail detail",
-        "description": "2: You can add more text here to describe...",
+        "description": "You can add more text here for additional notes",
         "dateset": "28/06/2021",
         "datedue": "01/07/2021"
     },
@@ -22,7 +22,7 @@
         "listName": "New Example",
         "selected": false,
         "action": "Example list action",
-        "description": "2: You can add more text here to describe...",
+        "description": "You can add more text here for additional notes",
         "dateset": "28/06/2021",
         "datedue": "01/07/2021"
     }

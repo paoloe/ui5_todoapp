@@ -1,8 +1,7 @@
 <mvc:View
+	controllerName="sap.ui.demo.fiori2.controller.Detail"
 	xmlns="sap.uxap"
 	xmlns:m="sap.m"
-	xmlns:f="sap.f"
-	xmlns:form="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc">
 	<ObjectPageLayout
 		id="ObjectPageLayout"
@@ -30,18 +29,6 @@
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
-		<headerContent>
-			<m:FlexBox wrap="Wrap" fitContainer="true" alignItems="Stretch">
-				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<m:Label text="Date Set:"/>
-					<!-- <m:Text text="{list>dateset}"/> -->
-				</m:VBox>
-				<m:VBox justifyContent="Center" class="sapUiSmallMarginEnd">
-					<m:Label text="Date Due:"/>
-					<!-- <m:Text text="{list>datedue}"/> -->
-				</m:VBox>
-			</m:FlexBox>
-		</headerContent>
 		<sections>
 			<ObjectPageSection title="To Do:">
 				<subSections>
@@ -54,7 +41,7 @@
 									<m:Column/>
 								</m:columns>
 								<m:items>
-									<m:ColumnListItem type="Navigation">
+									<m:ColumnListItem type="Navigation" press=".onSupplierPress">
 										<m:cells>
 											<m:CheckBox
 												text="{list>action}"
