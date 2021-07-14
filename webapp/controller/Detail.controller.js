@@ -1,7 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	'sap/f/library'
-], function (Controller, fioriLibrary) {
+	'sap/f/library',
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+], function (Controller, fioriLibrary, Filter, FilterOperator) {
 	"use strict";
 
 	return Controller.extend("sap.ui.demo.fiori2.controller.Detail", {
@@ -12,9 +14,12 @@ sap.ui.define([
 			this.oRouter = this.oOwnerComponent.getRouter();
 			this.oModel = this.oOwnerComponent.getModel();
 
-			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
-			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
-			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
+
+			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
+			
 
 			// var oBunlde2 = this.getView().getModel("oModel").getProperty("/");
 			// for(var i = 0; i < oBunlde2.length; i++){
@@ -23,7 +28,7 @@ sap.ui.define([
 			// }
 		},
 
-		onSupplierPress: function (oEvent) {
+		onSupplierPress: function (event) {
 			// var supplierPath = oEvent.getSource().getBindingContext("list").getPath(),
 			// 	supplier = supplierPath.split("/").slice(-1).pop();
 			// 	oNextUIState;
@@ -40,15 +45,36 @@ sap.ui.define([
 			// this.oRouter.navTo("detailDetail", {layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, supplier: supplier, product: this._product});
 
 			var oFCL = this.oView.getParent().getParent();
-			oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);	
+			oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
+		},
+
+		filterList: function(oEvent){
+			var aFilter = [];
+			var sQuery = oEvent.getSource().getBindingContext("list").getObject();
+			// if (sQuery) {
+			// 	aFilter.push(new Filter("list", FilterOperator.Contains, "To Do"));
+			// }
+
+			aFilter.push(new Filter("listName", FilterOperator.Contains, sQuery.listName));
+
+			// filter binding
+			var oList = this.getView().byId("suppliersTable");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(aFilter);
 		},
 
 		_onProductMatched: function (oEvent) {
-			this._product = oEvent.getParameter("arguments").product || this._product || "0";
-			this.getView().bindElement({
-				path: "/list/" + this._product,
-				model: "list"
-			});
+			var oArguments = oEvent.getParameter("arguments");
+			var listName = oArguments.listName;
+			
+			var aFilter = [];
+
+			aFilter.push(new Filter("listName", FilterOperator.Contains, listName));
+
+			// filter binding
+			var oList = this.getView().byId("suppliersTable");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(aFilter);
 		},
 
 		onEditToggleButtonPress: function() {

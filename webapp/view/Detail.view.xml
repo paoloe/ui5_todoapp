@@ -30,13 +30,19 @@
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
 		<sections>
-			<ObjectPageSection title="To Do:">
+			<ObjectPageSection title="Actions:">
 				<subSections>
 					<ObjectPageSubSection>
 						<blocks>
 							<m:Table
 								id="suppliersTable"
-								items="{path : 'list>/'}">
+								items="{
+									path : 'list>/',
+									sorter: {
+										path : 'listName',
+										group: true
+									}
+								}">
 								<m:columns>
 									<m:Column/>
 								</m:columns>

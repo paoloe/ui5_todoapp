@@ -59,7 +59,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{product}/{layout}",
+					"pattern": "detail/{listName}",
 					"name": "detail",
 					"target": [
 						"master",

@@ -13,8 +13,9 @@ sap.ui.define([
 		onInit: function () {
 			this.oView = this.getView();
 			this._bDescendingSort = false;
-			this.oModel = this.oView.byId("productsTable");
+			this.oModel = this.getOwnerComponent().getModel();
 			this.oRouter = this.getOwnerComponent().getRouter();
+
 		},
 
 		onSearch: function (oEvent) {
@@ -51,8 +52,34 @@ sap.ui.define([
 			// 		product: product
 			// 	});
 			// }.bind(this));
+			// this.getRouter().navTo(routeName,{
+			// 	itemId: selectedItem.getBindingContext("oModel").getProperty("id",)
+			// });
+
+			var bindingContext = oEvent.getSource().getBindingContext("list");
+			var selectedObject = bindingContext.getObject();
+			var listName = selectedObject.listName;
+
+			this.oRouter.navTo("detail",{
+				"listName" : listName 
+			  });
+
 			var oFCL = this.oView.getParent().getParent();
-			oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);			
+			oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
+		},
+
+		onPressFilter: function(oEvent){
+			// build the filter array
+			var aFilter = [];
+			var sQuery = oEvent.getParameter("query");
+			if (sQuery) {
+				aFilter.push(new Filter("To Do", FilterOperator.Contains, sQuery));
+			}
+
+			// filter binding
+			var oList = this.getView().byId("list");
+			var oBinding = oList.getBinding("items");
+			oBinding.filter(aFilter);
 		}
 	});
 });
