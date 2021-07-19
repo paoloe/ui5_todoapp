@@ -25,7 +25,9 @@
 				<Table
 					id="productsTable"
 					inset="false"
-					items="{list>/}"
+					items="{
+							path: 'list>/'
+						}"
 					class="sapFDynamicPageAlignContent"
 					width="auto">
 					<columns>

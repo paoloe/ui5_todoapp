@@ -15,6 +15,7 @@ sap.ui.define([
 			this._bDescendingSort = false;
 			this.oModel = this.getOwnerComponent().getModel();
 			this.oRouter = this.getOwnerComponent().getRouter();
+			this.oActionModel = this.getOwnerComponent().getModel();
 
 		},
 
@@ -26,7 +27,7 @@ sap.ui.define([
 				oTableSearchState = [new Filter("Name", FilterOperator.Contains, sQuery)];
 			}
 
-			this.oProductsTable.getBinding("items").filter(oTableSearchState, "Application");
+			this.oModel.getBinding("list").filter(oTableSearchState, "listName");
 		},
 
 		onAdd: function () {
@@ -42,30 +43,20 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			// var productPath = oEvent.getSource().getBindingContext("list").getPath(),
-			// 	product = productPath.split("/").slice(-1).pop(),
-			// 	oNextUIState;
-			// this.getOwnerComponent().getHelper().then(function (oHelper) {
-			// 	oNextUIState = oHelper.getNextUIState(1);
-			// 	this.oRouter.navTo("detail", {
-			// 		layout: oNextUIState.layout,
-			// 		product: product
-			// 	});
-			// }.bind(this));
-			// this.getRouter().navTo(routeName,{
-			// 	itemId: selectedItem.getBindingContext("oModel").getProperty("id",)
-			// });
+			var itemPath = oEvent.getSource().getBindingContext("list").getPath(),
+				id = itemPath.split("/").slice(-1).pop();
 
-			var bindingContext = oEvent.getSource().getBindingContext("list");
-			var selectedObject = bindingContext.getObject();
-			var listName = selectedObject.listName;
+			// this.oRouter.navTo("detail",{
+			// 	"listName": listName
+			//   });
 
-			this.oRouter.navTo("detail",{
-				"listName" : listName 
-			  });
+			  this.oRouter.navTo("detail", {
+				  layout: fioriLibrary.LayoutType.TwoColumnsMidExpanded, 
+				  id: id
+				});
 
-			var oFCL = this.oView.getParent().getParent();
-			oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
+			// var oFCL = this.oView.getParent().getParent();
+			// oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
 		},
 
 		onPressFilter: function(oEvent){
