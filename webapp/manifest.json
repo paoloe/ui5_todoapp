@@ -24,7 +24,7 @@
 			}
 		},
 		"models":{
-			"oModel": {
+			"oActionModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "./source/list.json"
 			  }
@@ -59,7 +59,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{listName}",
+					"pattern": "detail/{id}/{layout}",
 					"name": "detail",
 					"target": [
 						"master",
@@ -67,7 +67,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{product}/detailDetail/{supplier}/{layout}",
+					"pattern": "detailDetail/{id}/{layout}",
 					"name": "detailDetail",
 					"target": [
 						"master",

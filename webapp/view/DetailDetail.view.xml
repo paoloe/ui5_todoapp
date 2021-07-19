@@ -36,11 +36,22 @@
 			</DynamicPageTitle>
 		</title>
 		<content>
-			<m:Input
-			value="{list>/0/description}"
-			width="80%"
-			fieldWidth="60%"
-			class="sapUiSmallMarginBottom" />
+			<m:Table
+				id="descTable"
+				items="{
+					path : 'list>/'
+				}">
+				<m:columns>
+					<m:Column/>
+				</m:columns>
+				<m:items>
+					<m:ColumnListItem type="Navigation">
+						<m:cells>
+							<m:ObjectIdentifier text="{list>description}"/>
+						</m:cells>
+					</m:ColumnListItem>
+				</m:items>
+			</m:Table>
 		</content>
 	</DynamicPage>
 </mvc:View>

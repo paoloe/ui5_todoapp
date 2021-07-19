@@ -13,12 +13,13 @@ sap.ui.define([
 			this.oView = this.getView();
 			this.oRouter = this.oOwnerComponent.getRouter();
 			this.oModel = this.oOwnerComponent.getModel();
+			this.oActionModel = this.oOwnerComponent.getModel();
 
-			// this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
-			// this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
-			// this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
+			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
+			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
+			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
 
-			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
 			
 
 			// var oBunlde2 = this.getView().getModel("oModel").getProperty("/");
@@ -28,45 +29,24 @@ sap.ui.define([
 			// }
 		},
 
-		onSupplierPress: function (event) {
-			// var supplierPath = oEvent.getSource().getBindingContext("list").getPath(),
-			// 	supplier = supplierPath.split("/").slice(-1).pop();
-			// 	oNextUIState;
+		onSupplierPress: function (oEvent) {
+			var bindingContext = oEvent.getSource().getBindingContext("list").getPath(),
+				id = bindingContext.split("/").slice(-1).pop();
 
-			// this.oOwnerComponent.getHelper().then(function (oHelper) {
-			// 	oNextUIState = oHelper.getNextUIState(2);
-			// 	this.oRouter.navTo("detailDetail", {
-			// 		layout: oNextUIState.layout,
-			// 		supplier: supplier,
-			// 		product: this._product
-			// 	});
-			// }.bind(this));
+			this.oRouter.navTo("detailDetail", {
+			layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, 
+			id: id
+			});
 
-			// this.oRouter.navTo("detailDetail", {layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, supplier: supplier, product: this._product});
-
-			var oFCL = this.oView.getParent().getParent();
-			oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
+			// var oFCL = this.oView.getParent().getParent();
+			// oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
 		},
 
-		filterList: function(oEvent){
-			var aFilter = [];
-			var sQuery = oEvent.getSource().getBindingContext("list").getObject();
-			// if (sQuery) {
-			// 	aFilter.push(new Filter("list", FilterOperator.Contains, "To Do"));
-			// }
-
-			aFilter.push(new Filter("listName", FilterOperator.Contains, sQuery.listName));
-
-			// filter binding
-			var oList = this.getView().byId("suppliersTable");
-			var oBinding = oList.getBinding("items");
-			oBinding.filter(aFilter);
-		},
-
-		_onProductMatched: function (oEvent) {
+		_onProductMatched: function (oEvent) {		
 			var oArguments = oEvent.getParameter("arguments");
-			var listName = oArguments.listName;
-			
+			var item = oArguments.id;
+			var path = "/" + item + "/listName";
+			var listName = this.getView().getModel("oActionModel").getProperty(path);			
 			var aFilter = [];
 
 			aFilter.push(new Filter("listName", FilterOperator.Contains, listName));

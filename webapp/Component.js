@@ -13,16 +13,19 @@ sap.ui.define([
 		},
 
 		init: function () {
-			var oModel,
+			var oActionModel,
+				oModel,
 				oProductsModel,
 				oRouter;
 
 			UIComponent.prototype.init.apply(this, arguments);
 
+			oActionModel = new JSONModel();
+			oActionModel.loadData("source/list.json");
+			this.setModel(oActionModel, 'list');
+
 			oModel = new JSONModel();
-			// load the list data source
-			oModel.loadData("source/list.json");
-			this.setModel(oModel, 'list');
+			this.setModel(oModel);
 
 			// set products demo model on this sample
 			oProductsModel = new JSONModel(sap.ui.require.toUrl('sap/ui/demo/mock/products.json'));
@@ -51,13 +54,9 @@ sap.ui.define([
 				sLayout = oEvent.getParameters().arguments.layout,
 				oNextUIState;
 
-			// If there is no layout parameter, query for the default level 0 layout (normally OneColumn)
+			// If there is no layout parameter, set a default layout (normally OneColumn)
 			if (!sLayout) {
-				this.getHelper().then(function(oHelper) {
-					oNextUIState = oHelper.getNextUIState(0);
-					oModel.setProperty("/layout", oNextUIState.layout);
-				});
-				return;
+				sLayout = fioriLibrary.LayoutType.OneColumn;
 			}
 
 			oModel.setProperty("/layout", sLayout);
