@@ -39,7 +39,7 @@
 			<m:Table
 				id="descTable"
 				items="{
-					path : 'list>/'
+					path : 'actions>/'
 				}">
 				<m:columns>
 					<m:Column/>
@@ -47,7 +47,7 @@
 				<m:items>
 					<m:ColumnListItem type="Navigation">
 						<m:cells>
-							<m:ObjectIdentifier text="{list>description}"/>
+							<m:ObjectIdentifier text="{actions>Description}"/>
 						</m:cells>
 					</m:ColumnListItem>
 				</m:items>

@@ -13,48 +13,51 @@ sap.ui.define([
 			this.oView = this.getView();
 			this.oRouter = this.oOwnerComponent.getRouter();
 			this.oModel = this.oOwnerComponent.getModel();
-			this.oActionModel = this.oOwnerComponent.getModel();
+			this.oActModel = this.oOwnerComponent.getModel();
+			this.oCatModel = this.oOwnerComponent.getModel();
 
 			this.oRouter.getRoute("master").attachPatternMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachPatternMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onProductMatched, this);
-
-			// this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
-			
-
-			// var oBunlde2 = this.getView().getModel("oModel").getProperty("/");
-			// for(var i = 0; i < oBunlde2.length; i++){
-			// 	var obj = oBunlde2[i];
-			// 	console.log(obj);
-			// }
 		},
 
+		/* 
+			get path of selected action
+			pass to detailDetail
+		*/
 		onSupplierPress: function (oEvent) {
-			var bindingContext = oEvent.getSource().getBindingContext("list").getPath(),
-				id = bindingContext.split("/").slice(-1).pop();
+			var bindingContext = oEvent.getSource().getBindingContext("actions").getPath(),
+				action = bindingContext.split("/").slice(-1).pop();
 
 			this.oRouter.navTo("detailDetail", {
 			layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, 
-			id: id
+			action: action
 			});
-
-			// var oFCL = this.oView.getParent().getParent();
-			// oFCL.setLayout(fioriLibrary.LayoutType.ThreeColumnsMidExpanded);
 		},
 
+		/*
+			get selected item from lists
+			get categoryid and filter action list based on this 
+		 */
 		_onProductMatched: function (oEvent) {		
-			var oArguments = oEvent.getParameter("arguments");
-			var item = oArguments.id;
-			var path = "/" + item + "/listName";
-			var listName = this.getView().getModel("oActionModel").getProperty(path);			
+			this._actions = oEvent.getParameter("arguments").action;
+			// var item = oArguments.id;
+			var path = "/" + this._actions + "/CategoryId";
+			var categoryId = this.getView().getModel("oCatModel").getProperty(path);			
 			var aFilter = [];
 
-			aFilter.push(new Filter("listName", FilterOperator.Contains, listName));
+			aFilter.push(new Filter("Category", FilterOperator.Contains, categoryId));
 
-			// filter binding
+			// // filter binding
 			var oList = this.getView().byId("suppliersTable");
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(aFilter);
+
+			// this._action = oEvent.getParameter("arguments").action || this._action || "0";
+			// this.getView().bindElement({
+			// 	path: "/" + this._action,
+			// 	model: "actions"
+			// });
 		},
 
 		onEditToggleButtonPress: function() {

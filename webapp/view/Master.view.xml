@@ -26,7 +26,7 @@
 					id="productsTable"
 					inset="false"
 					items="{
-							path: 'list>/'
+							path: 'categories>/'
 						}"
 					class="sapFDynamicPageAlignContent"
 					width="auto">
@@ -43,8 +43,10 @@
 							type="Navigation"
 							press=".onListItemPress">
 							<cells>
-								<ObjectIdentifier text="{list>listName}"/>
-								<!--add the number of actions per list here-->
+								<!-- list name -->
+								<ObjectIdentifier text="{categories>CategoryName}"/>
+								<!-- number of action counter -->
+								<ObjectIdentifier text="{categories>NumberOfActions}"/>
 							</cells>
 						</ColumnListItem>
 					</items>

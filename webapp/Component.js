@@ -13,16 +13,21 @@ sap.ui.define([
 		},
 
 		init: function () {
-			var oActionModel,
+			var oActModel,
+				oCatModel,
 				oModel,
 				oProductsModel,
 				oRouter;
 
 			UIComponent.prototype.init.apply(this, arguments);
 
-			oActionModel = new JSONModel();
-			oActionModel.loadData("source/list.json");
-			this.setModel(oActionModel, 'list');
+			oActModel = new JSONModel();
+			oActModel.loadData("source/Action.json");
+			this.setModel(oActModel, 'actions');
+
+			oCatModel = new JSONModel();
+			oCatModel.loadData("source/ActionCategory.json");
+			this.setModel(oCatModel, 'categories');
 
 			oModel = new JSONModel();
 			this.setModel(oModel);
@@ -42,8 +47,8 @@ sap.ui.define([
 				var oSettings = {
 					defaultTwoColumnLayoutType: fioriLibrary.LayoutType.TwoColumnsMidExpanded,
 					defaultThreeColumnLayoutType: fioriLibrary.LayoutType.ThreeColumnsMidExpanded,
-					initialColumnsCount: 2,
-					maxColumnsCount: 2
+					initialColumnsCount: 1,
+					maxColumnsCount: 3
 				};
 				return (FlexibleColumnLayoutSemanticHelper.getInstanceFor(oFCL, oSettings));
 			 });

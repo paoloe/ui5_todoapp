@@ -24,10 +24,14 @@
 			}
 		},
 		"models":{
-			"oActionModel": {
+			"oActModel": {
 				"type": "sap.ui.model.json.JSONModel",
-				"uri": "./source/list.json"
-			  }
+				"uri": "./source/Action.json"
+			  },
+			"oCatModel":{
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "./source/ActionCategory.json"
+			}
 		},
 		"config": {
 			"fullWidth": true
@@ -59,7 +63,7 @@
 					]
 				},
 				{
-					"pattern": "detail/{id}/{layout}",
+					"pattern": "detail/{action}/{layout}",
 					"name": "detail",
 					"target": [
 						"master",
@@ -67,7 +71,7 @@
 					]
 				},
 				{
-					"pattern": "detailDetail/{id}/{layout}",
+					"pattern": "detailDetail/{action}/{layout}",
 					"name": "detailDetail",
 					"target": [
 						"master",

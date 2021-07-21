@@ -2,6 +2,7 @@
 	controllerName="sap.ui.demo.fiori2.controller.Detail"
 	xmlns="sap.uxap"
 	xmlns:m="sap.m"
+	xmlns:f="sap.f"
 	xmlns:mvc="sap.ui.core.mvc">
 	<ObjectPageLayout
 		id="ObjectPageLayout"
@@ -37,21 +38,18 @@
 							<m:Table
 								id="suppliersTable"
 								items="{
-									path : 'list>/',
-									sorter: {
-										path : 'listName',
-										group: true
-									}
-								}">
+									path: 'actions>/'
+									}">
 								<m:columns>
 									<m:Column/>
 								</m:columns>
 								<m:items>
 									<m:ColumnListItem type="Navigation" press=".onSupplierPress">
 										<m:cells>
-											<m:CheckBox
-												text="{list>action}"
-												selected="{list>selected}"/>
+											<m:CheckBox 
+												text="{
+													path: 'actions>Action'
+												}"/>
 										</m:cells>
 									</m:ColumnListItem>
 								</m:items>
