@@ -29,7 +29,7 @@
     {
         "ItemId":"a4",
         "Category": "c1",
-        "Selected": false,
+        "Selected": true,
         "Action": "Another to do Action",
         "Description": "You can add more text here for additional notes 4",
         "DateSet": "28/06/2021",
@@ -38,7 +38,7 @@
     {
         "ItemId":"a5",
         "Category": "c2",
-        "Selected": false,
+        "Selected": true,
         "Action": "Another to completed Action",
         "Description": "You can add more text here for additional notes 5",
         "DateSet": "28/06/2021",

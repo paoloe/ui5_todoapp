@@ -5,13 +5,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>UI5 To-Do-App</title>
 
+	<!-- data-sap-ui-resourceroots='{
+		"sap.ui.demo.fiori2": "./",
+		"sap.ui.demo.mock": "https://openui5.hana.ondemand.com/test-resources/sap/ui/documentation/sdk/"
+	}' -->
+
 	<script id="sap-ui-bootstrap"
 		src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
 		data-sap-ui-theme="sap_belize"
-		data-sap-ui-resourceroots='{
-			"sap.ui.demo.fiori2": "./",
-			"sap.ui.demo.mock": "https://openui5.hana.ondemand.com/test-resources/sap/ui/documentation/sdk/"
-		}'
+		data-sap-ui-resourceroots='{"tdapp": "./"}'
 		data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
 		data-sap-ui-compatVersion="edge"
 		data-sap-ui-async="true"
@@ -21,7 +23,7 @@
 
 <body class="sapUiBody sapUiSizeCompact">
 	<div data-sap-ui-component
-		data-name="sap.ui.demo.fiori2"
+		data-name="tdapp"
 		data-height="100%"
 		data-id="container"
 		data-settings='{"id" : "fiori2"}'

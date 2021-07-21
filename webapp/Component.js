@@ -6,7 +6,7 @@ sap.ui.define([
 ], function(UIComponent, JSONModel, FlexibleColumnLayoutSemanticHelper, fioriLibrary) {
 	'use strict';
 
-	return UIComponent.extend('sap.ui.demo.fiori2.Component', {
+	return UIComponent.extend('tdapp.Component', {
 
 		metadata: {
 			manifest: 'json'
