@@ -1,0 +1,17 @@
+[
+    {
+        "CategoryId": "c1",
+        "CategoryName": "To do",
+        "NumberOfActions" : 2
+    },
+    {
+        "CategoryId": "c2",
+        "CategoryName": "Completed",
+        "NumberOfActions": 1 
+    },
+    {
+        "CategoryId": "c3",
+        "CategoryName": "New Example",
+        "NumberOfActions": 1
+    }
+]

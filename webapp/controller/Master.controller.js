@@ -15,7 +15,7 @@ sap.ui.define([
 			this._bDescendingSort = false;
 			this.oModel = this.getOwnerComponent().getModel();
 			this.oRouter = this.getOwnerComponent().getRouter();
-			this.oActionModel = this.getOwnerComponent().getModel();
+			this.oCatModel = this.getOwnerComponent().getModel();
 
 		},
 
@@ -43,8 +43,8 @@ sap.ui.define([
 		},
 
 		onListItemPress: function (oEvent) {
-			var itemPath = oEvent.getSource().getBindingContext("list").getPath(),
-				id = itemPath.split("/").slice(-1).pop();
+			var itemPath = oEvent.getSource().getBindingContext("categories").getPath(),
+				action = itemPath.split("/").slice(-1).pop();
 
 			// this.oRouter.navTo("detail",{
 			// 	"listName": listName
@@ -52,7 +52,7 @@ sap.ui.define([
 
 			  this.oRouter.navTo("detail", {
 				  layout: fioriLibrary.LayoutType.TwoColumnsMidExpanded, 
-				  id: id
+				  action: action
 				});
 
 			// var oFCL = this.oView.getParent().getParent();

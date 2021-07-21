@@ -12,24 +12,26 @@ sap.ui.define([
 
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oActionModel = oOwnerComponent.getModel();
-
-			this.oRouter.getRoute("detailDetail").attachMatched(this._onPatternMatch, this);
+			
+			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onPatternMatch, this);
 		},
 
+		/* 
+			get id of selected action
+			filter selected action description by id
+		*/
 		_onPatternMatch: function (oEvent) {			
-			var oArguments = oEvent.getParameter("arguments");
-			var item = oArguments.id;
-			var path = "/" + item + "/description"
-			var description = this.getView().getModel("oActionModel").getProperty(path);	
-			
-			var aFilter = [];
+			this._action = oEvent.getParameter("arguments").action;
+			var path = "/" + this._action + "/ItemId";
+			var description = this.getView().getModel("oActModel").getProperty(path);
+			var bFilter = [];
 
-			aFilter.push(new Filter("description", FilterOperator.EQ, description));
+			bFilter.push(new Filter("ItemId", FilterOperator.Contains, description));
 
 			// filter binding
 			var oList = this.getView().byId("descTable");
 			var oBinding = oList.getBinding("items");
-			oBinding.filter(aFilter);
+			oBinding.filter(bFilter);
 		},
 
 		onExit: function () {

@@ -1,0 +1,47 @@
+[
+    {   
+        "ItemId": "a1",
+        "Category": "c1",
+        "Selected": true,
+        "Action": "Add check box",
+        "Description": "You can add more text here for additional notes 1",
+        "DateSet": "28/06/2021",
+        "DateDue": "01/07/2021"
+    },
+    {
+        "ItemId": "a2",
+        "Category": "c2",
+        "Selected": false,
+        "Action": "Add detail detail",
+        "Description": "You can add more text here for additional notes 2",
+        "DateSet": "28/06/2021",
+        "DateDue": "01/07/2021"
+    },
+    {
+        "ItemId":"a3",
+        "Category": "c3",
+        "Selected": false,
+        "Action": "Example list Action",
+        "Description": "You can add more text here for additional notes 3",
+        "DateSet": "28/06/2021",
+        "DateDue": "01/07/2021"
+    },
+    {
+        "ItemId":"a4",
+        "Category": "c1",
+        "Selected": false,
+        "Action": "Another to do Action",
+        "Description": "You can add more text here for additional notes 4",
+        "DateSet": "28/06/2021",
+        "DateDue": "01/07/2021"
+    },
+    {
+        "ItemId":"a5",
+        "Category": "c2",
+        "Selected": false,
+        "Action": "Another to completed Action",
+        "Description": "You can add more text here for additional notes 5",
+        "DateSet": "28/06/2021",
+        "DateDue": "01/07/2021"
+    }
+]
