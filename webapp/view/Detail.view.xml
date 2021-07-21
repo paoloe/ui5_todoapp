@@ -46,10 +46,9 @@
 								<m:items>
 									<m:ColumnListItem type="Navigation" press=".onSupplierPress">
 										<m:cells>
-											<m:CheckBox 
-												text="{
-													path: 'actions>Action'
-												}"/>
+											<m:CheckBox
+												text="{actions>Action}"
+												selected="{actions>Selected}"/>
 										</m:cells>
 									</m:ColumnListItem>
 								</m:items>

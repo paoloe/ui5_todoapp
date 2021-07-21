@@ -8,18 +8,18 @@ sap.ui.define([
 
 	return Controller.extend("tdapp.controller.Detail", {
 		onInit: function () {
-			this.oOwnerComponent = this.getOwnerComponent();
+			var oOwnerComponent = this.getOwnerComponent();
 
-			this.oView = this.getView();
-			this.oRouter = this.oOwnerComponent.getRouter();
-			this.oModel = this.oOwnerComponent.getModel();
-			this.oActModel = this.oOwnerComponent.getModel();
-			this.oCatModel = this.oOwnerComponent.getModel();
-			this.oProductsTable = this.oView.byId("productsTable");
+			// this.oView = this.getView();
+			this.oRouter = oOwnerComponent.getRouter();
+			// this.oModel = oOwnerComponent.getModel();
+			// this.oActModel = oOwnerComponent.getModel();
+			// this.oCatModel = oOwnerComponent.getModel();
+			// this.oProductsTable = this.oView.byId("productsTable");
 
-			this.oRouter.getRoute("master").attachMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("master").attachMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
-			this.oRouter.getRoute("detailDetail").attachMatched(this._onProductMatched, this);
+			// this.oRouter.getRoute("detailDetail").attachMatched(this._onProductMatched, this);
 		},
 
 		/* 

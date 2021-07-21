@@ -47,7 +47,9 @@
 				<m:items>
 					<m:ColumnListItem type="Navigation">
 						<m:cells>
-							<m:ObjectIdentifier text="{actions>Description}"/>
+							<m:ObjectIdentifier 
+								text="{actions>Description}"
+							/>
 						</m:cells>
 					</m:ColumnListItem>
 				</m:items>
