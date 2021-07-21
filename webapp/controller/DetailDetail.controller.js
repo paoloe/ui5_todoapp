@@ -6,14 +6,14 @@ sap.ui.define([
 ], function (JSONModel, Controller, Filter, FilterOperator ) {
 	"use strict";
 
-	return Controller.extend("sap.ui.demo.fiori2.controller.DetailDetail", {
+	return Controller.extend("tdapp.controller.DetailDetail", {
 		onInit: function () {
 			var oOwnerComponent = this.getOwnerComponent();
 
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oActionModel = oOwnerComponent.getModel();
 			
-			this.oRouter.getRoute("detailDetail").attachPatternMatched(this._onPatternMatch, this);
+			this.oRouter.getRoute("detailDetail").attachMatched(this._onPatternMatch, this);
 		},
 
 		/* 
@@ -32,6 +32,13 @@ sap.ui.define([
 			var oList = this.getView().byId("descTable");
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(bFilter);
+			// this._action = oEvent.getParameter("arguments").action || this._action || "0";
+			// this._description = oEvent.getParameter("arguments")._description || this._description || "0";
+
+			// this.getView().bindElement({
+			// 	path:  "/" + this._action + "/" + this._description,
+			// 	model: "products"
+			// });
 		},
 
 		onExit: function () {

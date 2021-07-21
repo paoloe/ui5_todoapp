@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="sap.ui.demo.fiori2.controller.App"
+	controllerName="tdapp.controller.App"
 	displayBlock="true"
 	height="100%"
 	xmlns="sap.f"
@@ -10,13 +10,13 @@
 		backgroundDesign="Solid"
 		layout="{/layout}">
 		<beginColumnPages>
-			<mvc:XMLView id="beginView" viewName="sap.ui.demo.fiori2.view.Master"/>
+			<mvc:XMLView id="beginView" viewName="tdapp.view.Master"/>
 		</beginColumnPages>
 		<midColumnPages>
-			<mvc:XMLView id="detailView" viewName="sap.ui.demo.fiori2.view.Detail"/>
+			<mvc:XMLView id="detailView" viewName="tdapp.view.Detail"/>
 		</midColumnPages>
 		<endColumnPages>
-			<mvc:XMLView id="detailDetailView" viewName="sap.ui.demo.fiori2.view.DetailDetail"/>
+			<mvc:XMLView id="detailDetailView" viewName="tdapp.view.DetailDetail"/>
 		</endColumnPages>
 	</FlexibleColumnLayout>
 </mvc:View>
