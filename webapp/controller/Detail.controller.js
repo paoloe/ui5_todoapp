@@ -3,14 +3,16 @@ sap.ui.define([
 	'sap/f/library',
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-], function (Controller, fioriLibrary, Filter, FilterOperator) {
+	"sap/ui/core/syncStyleClass",
+	"sap/ui/core/Fragment"	
+], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment) {
 	"use strict";
 
 	return Controller.extend("tdapp.controller.Detail", {
 		onInit: function () {
 			var oOwnerComponent = this.getOwnerComponent();
 
-			// this.oView = this.getView();
+		    this.oView = this.getView();
 			this.oRouter = oOwnerComponent.getRouter();
 			// this.oModel = oOwnerComponent.getModel();
 			// this.oActModel = oOwnerComponent.getModel();
@@ -20,6 +22,30 @@ sap.ui.define([
 			// this.oRouter.getRoute("master").attachMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
 			// this.oRouter.getRoute("detailDetail").attachMatched(this._onProductMatched, this);
+		},
+
+		onActionAdd: function () {
+			var oView = this.getView();
+
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+					name: "tdapp.view.fragment.AddAction",
+					controller : this
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			} 
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
+		},
+
+		onDialogCancelPress: function() {
+			this.byId("AddActionDialog").close();
 		},
 
 		/* 
@@ -33,7 +59,7 @@ sap.ui.define([
 			this.oRouter.navTo("detailDetail", {
 			layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, 
 			action: action
-			});
+			})
 		},
 
 		/*
