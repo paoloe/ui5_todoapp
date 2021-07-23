@@ -5,7 +5,7 @@ sap.ui.define([
 ) {
 	"use strict";
 
-	return Controller.extend("tdapp.controller.extension.AddFlightDialog", {
+	return Controller.extend("tdapp.controller.extension.AddActionDialog", {
 		onDialogAddPress: function () {
 			// don't actually know what the below is doing?...
 			const isInput = control => control.isA("sap.m.InputBase");

@@ -13,7 +13,7 @@
 				"sap.ui.controllerExtenstions":{
 					"tdapp.controller.Detail":{
 						"controllerNames":[
-							"tdapp.controller.extension.AddFlightDialog"
+							"tdapp.controller.extension.AddActionDialog"
 						]
 					}
 				}

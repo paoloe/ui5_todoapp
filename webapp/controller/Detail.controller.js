@@ -5,8 +5,8 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/syncStyleClass",
 	"sap/ui/core/Fragment",
-	"tdapp/controller/extension/AddFlightDialog"
-], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment, AddFlightDialog) {
+	"tdapp/controller/extension/AddActionDialog"
+], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment, AddActionDialog) {
 	"use strict";
 
 	return Controller.extend("tdapp.controller.Detail", {
