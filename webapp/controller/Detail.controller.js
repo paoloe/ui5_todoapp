@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/syncStyleClass",
-	"sap/ui/core/Fragment"	
-], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment) {
+	"sap/ui/core/Fragment",
+	"tdapp/controller/extension/AddFlightDialog"
+], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment, AddFlightDialog) {
 	"use strict";
 
 	return Controller.extend("tdapp.controller.Detail", {
@@ -22,6 +23,25 @@ sap.ui.define([
 			// this.oRouter.getRoute("master").attachMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
 			// this.oRouter.getRoute("detailDetail").attachMatched(this._onProductMatched, this);
+		},
+
+		onOpenDialog: function () {
+			var oView = this.getView();
+
+			// create dialog lazily
+			if (!this.pDialog) {
+				this.pDialog = Fragment.load({
+					id: oView.getId(),
+					name: "tdapp.view.fragment.AddAction",
+				}).then(function (oDialog) {
+					// connect dialog to the root view of this component (models, lifecycle)
+					oView.addDependent(oDialog);
+					return oDialog;
+				});
+			} 
+			this.pDialog.then(function(oDialog) {
+				oDialog.open();
+			});
 		},
 
 		/* 
