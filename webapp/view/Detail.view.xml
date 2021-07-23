@@ -18,7 +18,7 @@
 					<m:Button
 						text="Add"
 						type="Transparent"
-						press=".onActionAdd"/>
+						press=".onOpenDialog"/>
 				</actions>
 			</ObjectPageDynamicHeaderTitle>
 		</headerTitle>
