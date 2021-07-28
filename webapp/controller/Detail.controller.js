@@ -5,24 +5,14 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/ui/core/syncStyleClass",
 	"sap/ui/core/Fragment",
-	"tdapp/controller/extension/AddActionDialog"
-], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment, AddActionDialog) {
+], function (Controller, fioriLibrary, Filter, FilterOperator, syncStyleClass, Fragment) {
 	"use strict";
 
 	return Controller.extend("tdapp.controller.Detail", {
 		onInit: function () {
 			var oOwnerComponent = this.getOwnerComponent();
-
-		    this.oView = this.getView();
 			this.oRouter = oOwnerComponent.getRouter();
-			// this.oModel = oOwnerComponent.getModel();
-			// this.oActModel = oOwnerComponent.getModel();
-			// this.oCatModel = oOwnerComponent.getModel();
-			// this.oProductsTable = this.oView.byId("productsTable");
-
-			// this.oRouter.getRoute("master").attachMatched(this._onProductMatched, this);
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
-			// this.oRouter.getRoute("detailDetail").attachMatched(this._onProductMatched, this);
 		},
 
 		onOpenDialog: function () {
@@ -33,6 +23,7 @@ sap.ui.define([
 				this.pDialog = Fragment.load({
 					id: oView.getId(),
 					name: "tdapp.view.fragment.AddAction",
+					controller: this
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
 					oView.addDependent(oDialog);
@@ -42,6 +33,56 @@ sap.ui.define([
 			this.pDialog.then(function(oDialog) {
 				oDialog.open();
 			});
+		},
+
+		onDialogAddPress: function () {
+			// don't actually know what the below is doing?...
+			const isInput = control => control.isA("sap.m.InputBase");
+			// below retrieves the input values as an array from the dialogue
+			var aFormInput = this.byId("form").getControlsByFieldGroupId("inputs").filter(isInput);
+			this.oActModel = this.getOwnerComponent().getModel("oActModel");
+			var aInput = this.oActModel.getData();
+
+			aInput.push({"ItemId": "a5",
+						"Category": "c1",
+						"Selected": false,
+						"Action": "Add check box",
+						"Description": "You can add more text here for additional notes 1",
+						"DateSet": this.getCurrentDate(),
+						"DateDue": "01/07/2021"});
+			
+			//this.oActModel.setProperty("/", aInput);
+			this.oActModel.setData(aInput);
+
+			// aFormInput.forEach(function(oInputElement, i){
+			// 	var test = oInputElement.lastValue;
+			// });
+
+			// this.oActModel.getData().push({	"ItemId": "a5",
+			// 							"Category": "c1",
+			// 							"Selected": true,
+			// 							"Action": "Add check box",
+			// 							"Description": "You can add more text here for additional notes 1",
+			// 							"DateSet": this.getCurrentDate(),
+			// 							"DateDue": "01/07/2021"});;
+			// console.log(this.oActModel);
+		},
+		
+		getCategory: function(){
+			
+		},
+
+		getNewItemId: function(){
+			return this.oActModel[length];
+		},
+
+		getCurrentDate: function(){
+			var oFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "dd/MM/yy"});
+			return oFormat.format(new Date());
+		},
+
+		onDialogCancelPress: function() {
+			this.byId("AddActionDialog").close();
 		},
 
 		/* 
