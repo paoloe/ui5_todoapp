@@ -13,6 +13,7 @@ sap.ui.define([
 			var oOwnerComponent = this.getOwnerComponent();
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
+			this.sCurrentCategory;
 		},
 
 		onOpenDialog: function () {
@@ -43,16 +44,18 @@ sap.ui.define([
 			this.oActModel = this.getOwnerComponent().getModel("oActModel");
 			var aInput = this.oActModel.getData();
 
-			aInput.push({"ItemId": "a5",
-						"Category": "c1",
+			aInput.push({"ItemId": this.getNewItemId(),
+						"Category": this.getCategory(),
 						"Selected": false,
 						"Action": "Add check box",
 						"Description": "You can add more text here for additional notes 1",
 						"DateSet": this.getCurrentDate(),
 						"DateDue": "01/07/2021"});
 			
-			//this.oActModel.setProperty("/", aInput);
-			this.oActModel.setData(aInput);
+			this.oActModel.setProperty("/", aInput);
+			// this.oActModel.setData(aInput);
+
+			console.log(aInput);
 
 			// aFormInput.forEach(function(oInputElement, i){
 			// 	var test = oInputElement.lastValue;
@@ -68,12 +71,19 @@ sap.ui.define([
 			// console.log(this.oActModel);
 		},
 		
+		setCategory: function(sCurrentCategory){
+			this.sCurrentCategory = sCurrentCategory;
+		},
 		getCategory: function(){
-			
+			return this.sCurrentCategory;
 		},
 
 		getNewItemId: function(){
-			return this.oActModel[length];
+			this.oActModel = this.getOwnerComponent().getModel("oActModel");
+			var iArrTotal = this.oActModel.getData().length;
+			// incremenet by 1 as this is a new entry
+			var sNewCategory = "a" + (iArrTotal + 1);
+			return sNewCategory;
 		},
 
 		getCurrentDate: function(){
@@ -107,21 +117,17 @@ sap.ui.define([
 			this._actions = oEvent.getParameter("arguments").action;
 			// var item = oArguments.id;
 			var path = "/" + this._actions + "/CategoryId";
-			var categoryId = this.getView().getModel("oCatModel").getProperty(path);			
+			var categoryId = this.getView().getModel("oCatModel").getProperty(path);
+			this.setCategory(categoryId);
+
 			var aFilter = [];
 
 			aFilter.push(new Filter("Category", FilterOperator.Contains, categoryId));
 
-			// // filter binding
+			// filter binding
 			var oList = this.getView().byId("suppliersTable");
 			var oBinding = oList.getBinding("items");
 			oBinding.filter(aFilter);
-
-			// this._action = oEvent.getParameter("arguments").action || this._action || "0";
-			// this.getView().bindElement({
-			// 	path: "/" + this._action,
-			// 	model: "actions"
-			// });
 		},
 
 		onEditToggleButtonPress: function() {
