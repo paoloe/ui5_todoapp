@@ -8,17 +8,6 @@
 		}
 	},
 	"sap.ui5": {
-		"extends": {
-			"extensions": {
-				"sap.ui.controllerExtenstions":{
-					"tdapp.controller.Detail":{
-						"controllerNames":[
-							"tdapp.controller.extension.AddActionDialog"
-						]
-					}
-				}
-			}
-		},
 		"rootView": {
 			"viewName": "tdapp.view.App",
 			"type": "XML",

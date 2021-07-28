@@ -1,11 +1,12 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
+	"tdapp/controller/Detail/controller"
 ], function(
-	Controller
+	controller
+
 ) {
 	"use strict";
 
-	return Controller.extend("tdapp.controller.extension.AddActionDialog", {
+	return controller.extend("tdapp.controller.extensio.AddActionDialog", {
 		onDialogAddPress: function () {
 			// don't actually know what the below is doing?...
 			const isInput = control => control.isA("sap.m.InputBase");
@@ -27,7 +28,6 @@ sap.ui.define([
 
 		onDialogCancelPress: function() {
 			this.byId("AddActionDialog").close();
-		},
-
-	});
+		}
+	})
 });
