@@ -49,19 +49,10 @@
     <Label text="Additional Notes"></Label>
     <Input
       fieldGroupIds="inputs"
-      value="{
-      }"
     />
     <Label text="Due Date"></Label>
     <DatePicker
       fieldGroupIds="inputs"
-      value="{
-        path: 'odata>fldate',
-        type: 'ODataDateTimeType',
-        constraints: {
-          nullable: true
-        }
-      }"
     ></DatePicker>
   </form:SimpleForm>
   <beginButton>

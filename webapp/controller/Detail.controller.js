@@ -13,7 +13,11 @@ sap.ui.define([
 			var oOwnerComponent = this.getOwnerComponent();
 			this.oRouter = oOwnerComponent.getRouter();
 			this.oRouter.getRoute("detail").attachMatched(this._onProductMatched, this);
+			
 			this.sCurrentCategory;
+			this.sTask;
+			this.sDesc;
+			this.sDueDate;
 		},
 
 		onOpenDialog: function () {
@@ -30,52 +34,92 @@ sap.ui.define([
 					oView.addDependent(oDialog);
 					return oDialog;
 				});
-			} 
+			}
 			this.pDialog.then(function(oDialog) {
 				oDialog.open();
 			});
 		},
 
 		onDialogAddPress: function () {
-			// don't actually know what the below is doing?...
-			const isInput = control => control.isA("sap.m.InputBase");
-			// below retrieves the input values as an array from the dialogue
-			var aFormInput = this.byId("form").getControlsByFieldGroupId("inputs").filter(isInput);
 			this.oActModel = this.getOwnerComponent().getModel("oActModel");
 			var aInput = this.oActModel.getData();
+			this.getFormInput();
 
 			aInput.push({"ItemId": this.getNewItemId(),
 						"Category": this.getCategory(),
 						"Selected": false,
-						"Action": "Add check box",
-						"Description": "You can add more text here for additional notes 1",
+						"Action": this.getTask(),
+						"Description": this.getDesc(),
 						"DateSet": this.getCurrentDate(),
-						"DateDue": "01/07/2021"});
-			
+						"DateDue": this.getDueDate()});
 			this.oActModel.setProperty("/", aInput);
-			// this.oActModel.setData(aInput);
-
-			console.log(aInput);
-
-			// aFormInput.forEach(function(oInputElement, i){
-			// 	var test = oInputElement.lastValue;
-			// });
-
-			// this.oActModel.getData().push({	"ItemId": "a5",
-			// 							"Category": "c1",
-			// 							"Selected": true,
-			// 							"Action": "Add check box",
-			// 							"Description": "You can add more text here for additional notes 1",
-			// 							"DateSet": this.getCurrentDate(),
-			// 							"DateDue": "01/07/2021"});;
-			// console.log(this.oActModel);
+			this.oActModel.setData(this.oActModel.getData(), true)
+			this.getView().getModel("oActModel").updateBindings(true);
+			console.log(this.oActModel.getData());
 		},
-		
-		setCategory: function(sCurrentCategory){
+		/**
+		 * getFormInput will return the three input variables from the
+		 * dialogue - logic?...
+		 * aFormInput = array of the input values
+		 * foreach aFormInput if i == 0 assign to taskInput
+		 * 	if i == 1 assign value to descriptionInput
+		 * 	if i == 2 assign value to dueDate
+		 */
+		getFormInput: function () {
+			// don't actually know what the below is doing?...
+			const isInput = control => control.isA("sap.m.InputBase");
+			// below retrieves the input values as an array from the dialogue
+			const aFormInput = this.byId("form").getControlsByFieldGroupId("inputs").filter(isInput);
+
+			// this.setTask(aFormInput[0]._lastValue);
+			// this.setDesc(aFormInput[1]._lastValue);
+			// this.setDueDate(aFormInput[2]._lastValue);
+
+			aFormInput.forEach(function(oInputElement, i){
+				var test = aFormInput[i]._lastValue;
+				if(i == 0){
+					this.setTask(aFormInput[i]._lastValue);
+					console.log(aFormInput[i]._lastValue);
+				}
+				else if(i == 1){
+					this.setDesc(aFormInput[i]._lastValue);
+					console.log(aFormInput[i]._lastValue);
+				}
+				else if(i == 2){
+					this.setDueDate(aFormInput[i]._lastValue);
+					console.log(aFormInput[i]._lastValue);
+				}
+			}.bind(this))
+		},
+
+		onAfterDialogClose: function(){
+
+		},
+		setCategory: function (sCurrentCategory) {
 			this.sCurrentCategory = sCurrentCategory;
 		},
-		getCategory: function(){
+		getCategory: function () {
 			return this.sCurrentCategory;
+		},
+		setDueDate: function(sDueDate){
+			this.sDueDate = sDueDate;
+		},
+		getDueDate: function () {
+			return this.sDueDate;
+		},
+
+		setTask: function (sTask) {
+			this.sTask = sTask;
+		},
+		getTask: function () {
+			return this.sTask;
+		},
+
+		setDesc: function (sDesc) {
+			this.sDesc = sDesc;
+		},
+		getDesc: function () {
+			return this.sDesc;
 		},
 
 		getNewItemId: function(){
@@ -87,7 +131,7 @@ sap.ui.define([
 		},
 
 		getCurrentDate: function(){
-			var oFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "dd/MM/yy"});
+			var oFormat = sap.ui.core.format.DateFormat.getInstance({pattern: "dd/MM/yyyy"});
 			return oFormat.format(new Date());
 		},
 
@@ -95,28 +139,28 @@ sap.ui.define([
 			this.byId("AddActionDialog").close();
 		},
 
-		/* 
+		/*
 			get path of selected action
 			pass to detailDetail
 		*/
 		onSupplierPress: function (oEvent) {
-			var bindingContext = oEvent.getSource().getBindingContext("actions").getPath(),
+			var bindingContext = oEvent.getSource().getBindingContext("oActModel").getPath(),
 				action = bindingContext.split("/").slice(-1).pop();
 
 			this.oRouter.navTo("detailDetail", {
-			layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded, 
+			layout: fioriLibrary.LayoutType.ThreeColumnsMidExpanded,
 			action: action
 			})
 		},
 
 		/*
 			get selected item from lists
-			get categoryid and filter action list based on this 
+			get categoryid and filter action list based on this
 		 */
-		_onProductMatched: function (oEvent) {		
-			this._actions = oEvent.getParameter("arguments").action;
+		_onProductMatched: function (oEvent) {
+			this.actions = oEvent.getParameter("arguments").action;
 			// var item = oArguments.id;
-			var path = "/" + this._actions + "/CategoryId";
+			var path = "/" + this.actions + "/CategoryId";
 			var categoryId = this.getView().getModel("oCatModel").getProperty(path);
 			this.setCategory(categoryId);
 

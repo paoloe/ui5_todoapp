@@ -30,7 +30,7 @@
 							<m:Table
 								id="suppliersTable"
 								items="{
-									path: 'actions>/'
+									path: 'oActModel>/'
 									}">
 								<m:columns>
 									<m:Column/>
@@ -39,8 +39,8 @@
 									<m:ColumnListItem type="Navigation" press=".onSupplierPress">
 										<m:cells>
 											<m:CheckBox
-												text="{actions>Action}"
-												selected="{actions>Selected}"/>
+												text="{oActModel>Action}"
+												selected="{oActModel>Selected}"/>
 										</m:cells>
 									</m:ColumnListItem>
 								</m:items>

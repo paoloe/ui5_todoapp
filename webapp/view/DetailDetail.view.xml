@@ -39,7 +39,7 @@
 			<m:Table
 				id="descTable"
 				items="{
-					path : 'actions>/'
+					path : 'oActModel>/'
 				}">
 				<m:columns>
 					<m:Column/>
@@ -48,7 +48,7 @@
 					<m:ColumnListItem type="Navigation">
 						<m:cells>
 							<m:ObjectIdentifier 
-								text="{actions>Description}"
+								text="{oActModel>Description}"
 							/>
 						</m:cells>
 					</m:ColumnListItem>
