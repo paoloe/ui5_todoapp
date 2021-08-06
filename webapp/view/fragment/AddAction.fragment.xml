@@ -1,0 +1,71 @@
+<Dialog id="AddActionDialog"
+  xmlns="sap.m"
+  xmlns:form="sap.ui.layout.form"
+  xmlns:core="sap.ui.core"
+  xmlns:l="sap.ui.layout"
+  core:require="{
+    'ODataStringType': 'sap/ui/model/odata/type/String',
+    'ODataDateTimeType': 'sap/ui/model/odata/type/DateTime',
+    'ODataTimeType': 'sap/ui/model/odata/type/Time',
+    'CurrencyType': 'sap/ui/model/type/Currency'
+  }"
+  title="Add New Task"
+  draggable="true"
+  stretch="{= !!${device>/system/phone}}"
+  beforeOpen=".onBeforeDialogOpen"
+  afterClose=".onAfterDialogClose"
+>
+  <form:SimpleForm id="form"
+    editable="true"
+    validateFieldGroup=".onValidateFieldGroup"
+    fieldGroupIds="inputs"
+  >
+    <Label text="Task"/>
+    <Input
+      fieldGroupIds="inputs"
+      required="true"
+      value="{
+        path: 'odata>connid',
+        type: 'ODataStringType',
+        constraints: {
+          nullable: false
+        }
+      }"
+    ></Input>
+    <!-- The commented out below is for selecting which list to add action to
+          currently it is fixed that the action will be added to the To Do List
+          add this functionality in the future -->
+    <!-- <Label text="List"></Label>
+    <MultiComboBox
+			selectionChange="handleSelectionChange"
+			selectionFinish="handleSelectionFinish"
+			width="350px"
+			items="{
+				path: 'categories>/',
+				sorter: { path: 'CategoryName' }
+			}">
+			<core:Item key="{categories>CategoryId}" text="{categories>CategoryName}"/>
+		</MultiComboBox> -->
+    <Label text="Additional Notes"></Label>
+    <Input
+      fieldGroupIds="inputs"
+    />
+    <Label text="Due Date"></Label>
+    <DatePicker
+      fieldGroupIds="inputs"
+    ></DatePicker>
+  </form:SimpleForm>
+  <beginButton>
+    <Button id="addButton"
+      text="Add"
+      type="Emphasized"
+      press=".onDialogAddPress"
+    />
+  </beginButton>
+  <endButton>
+    <Button id="cancelButton"
+      text="Cancel"
+      press=".onDialogCancelPress"
+    />
+  </endButton>
+</Dialog>
