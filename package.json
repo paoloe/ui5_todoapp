@@ -1,0 +1,23 @@
+{
+  "name": "ui5_todoapp",
+  "version": "1.0.0",
+  "description": "Simple to do app UI5 training.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paoloe/ui5_todoapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paoloe/ui5_todoapp/issues"
+  },
+  "homepage": "https://github.com/paoloe/ui5_todoapp#readme",
+  "dependencies": {
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.3.8"
+  }
+}
