@@ -15,12 +15,28 @@ async function main(){
       await client.connect();
 
       // Make the appropriate DB calls
-      await  listDatabases(client);
+      // await  listDatabases(client);
+
+      //Find one plant
+      await findOnePlantByName(client, "Monstera Deliciosa");
 
   } catch (e) {
       console.error(e);
   } finally {
       await client.close();
+  }
+}
+
+async function findOnePlantByName(client, nameOfPlant){
+  const result = await client.db("plantDB").collection("plant")
+  .findOne({name: nameOfPlant});
+
+  if (result) {
+    console.log(`Found a plant in the collection with the name '$
+    {nameOfPlant}'`);
+    console.log(result);
+  } else {
+    console.log(`No plants found with the name '${nameOfPlant}'`);
   }
 }
 
